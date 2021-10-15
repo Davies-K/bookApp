@@ -1,12 +1,12 @@
+import 'package:book_app/Presentation/Screens/home.dart';
 import 'package:book_app/Presentation/Screens/splash.dart';
-import 'package:book_app/main.dart';
 import 'package:flutter/material.dart';
 
 class Routers {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case 'home':
-        return MaterialPageRoute(builder: (_) => MyHomePage());
+        return MaterialPageRoute(builder: (_) => Home());
       case 'splash':
         return MaterialPageRoute(builder: (_) => SplashScreen());
       default:
