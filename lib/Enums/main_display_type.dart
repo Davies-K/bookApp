@@ -1,0 +1,4 @@
+enum DisplayType {
+  desktop,
+  mobile,
+}
