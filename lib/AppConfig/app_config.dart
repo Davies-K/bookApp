@@ -6,3 +6,4 @@ import 'package:google_fonts/google_fonts.dart';
 part 'app_theme.dart';
 part 'app_sizes.dart';
 part 'app_colors.dart';
+part 'app_strings.dart';

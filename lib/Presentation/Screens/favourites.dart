@@ -1,7 +1,10 @@
+import 'package:book_app/AppConfig/app_config.dart';
+import 'package:book_app/widgets/page_title.dart';
 import 'package:flutter/material.dart';
 
 class Favourites extends StatefulWidget {
-  Favourites({Key? key}) : super(key: key);
+  final String title;
+  Favourites({Key? key, required this.title}) : super(key: key);
 
   @override
   _FavouritesState createState() => _FavouritesState();
@@ -10,6 +13,14 @@ class Favourites extends StatefulWidget {
 class _FavouritesState extends State<Favourites> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+        child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.SIZE_32),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const SizedBox(height: AppSizes.HEIGHT_20),
+        PageTitle(title: widget.title),
+        const SizedBox(height: AppSizes.HEIGHT_20),
+      ]),
+    ));
   }
 }

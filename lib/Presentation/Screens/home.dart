@@ -14,7 +14,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ValueNotifier<int> bottomNavigatorTrigger = ValueNotifier(0);
-  final List<Widget> screens = [BookListPage(), Favourites(), ProfilePage()];
+  final List<Widget> screens = [
+    BookListPage(),
+    Favourites(title: StringConst.FAVORITES),
+    ProfilePage(title: StringConst.PROFILE)
+  ];
   Widget currentScreen = BookListPage();
   final PageStorageBucket bucket = PageStorageBucket();
 

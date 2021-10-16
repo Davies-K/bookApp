@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AppUtils {
+  static TextTheme getTextTheme(context) {
+    return Theme.of(context).textTheme;
+  }
+
   static showSnackBar(GlobalKey<ScaffoldState> key, String text) {
     final SnackBar snackBar = SnackBar(
       content: Text(text),

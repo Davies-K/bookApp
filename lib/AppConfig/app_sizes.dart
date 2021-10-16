@@ -116,6 +116,7 @@ class AppSizes {
   static const double WIDTH_150 = 150.0;
   static const double WIDTH_120 = 120.0;
   static const double WIDTH_100 = 100.0;
+  static const double WIDTH_90 = 90.0;
   static const double WIDTH_80 = 80.0;
   static const double WIDTH_74 = 74.0;
   static const double WIDTH_64 = 64.0;
