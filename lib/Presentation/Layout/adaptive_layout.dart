@@ -1,5 +1,5 @@
 import 'package:book_app/AppConfig/app_config.dart';
-import 'package:book_app/Enums/main_display_type.dart';
+import 'package:book_app/Core/Enums/main_display_type.dart';
 import 'package:flutter/material.dart';
 import 'package:layout/layout.dart';
 

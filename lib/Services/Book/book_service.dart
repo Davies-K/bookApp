@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:book_app/Constants/app_constants.dart';
-import 'package:book_app/Mixins/base_repository_mixins.dart';
+import 'package:book_app/Core/Mixins/base_repository_mixins.dart';
 import 'package:book_app/Models/book.dart';
 import 'package:book_app/Models/book_details.dart';
-import 'package:book_app/Repositories/book/book_service_repository.dart';
+import 'package:book_app/Core/Repositories/book/book_service_repository.dart';
 
 class BookService with BaseRepository implements BookServiceRepository {
   @override

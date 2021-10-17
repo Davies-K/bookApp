@@ -1,5 +1,5 @@
 import 'package:book_app/AppConfig/app_config.dart';
-import 'package:book_app/Helpers/navigation_helper.dart';
+import 'package:book_app/Core/Helpers/navigation_helper.dart';
 import 'package:book_app/Presentation/Layout/adaptive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -40,6 +40,6 @@ class _SplashScreenState extends State<SplashScreen>
     return Future.delayed(
         Duration(seconds: 4),
         () =>
-            AppNavigationHelper.navigateAndReplace(context, pageName: 'home'));
+            AppNavigationHelper.navigateAndReplace(context, pageName: 'login'));
   }
 }

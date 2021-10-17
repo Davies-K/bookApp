@@ -1,5 +1,5 @@
 import 'package:book_app/AppConfig/app_config.dart';
-import 'package:book_app/Enums/loading.dart';
+import 'package:book_app/Core/Enums/loading.dart';
 import 'package:book_app/Providers/book_list_provider.dart';
 import 'package:book_app/Utils/app_utils.dart';
 import 'package:book_app/widgets/book_card.dart';
@@ -21,8 +21,9 @@ class _BookListPageState extends State<BookListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizes.SIZE_32),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.SIZE_20),
       child: Consumer<BookListProvider>(builder: (context, provider, child) {
+        print(provider.bookList);
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const SizedBox(height: AppSizes.HEIGHT_20),
           PageTitle(title: StringConst.BOOKLIST_TITLE),

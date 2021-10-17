@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "562267603636",
+    "project_id": "appandup-f135d",
+    "storage_bucket": "appandup-f135d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562267603636:android:606fe09972459770614de1",
+        "android_client_info": {
+          "package_name": "com.appandup.book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "562267603636-i90mf8a2d1ipvetlnhibe202nvufc1qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhywXF1i1rIGAHyoCImIcmxzEYen64PQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "562267603636-i90mf8a2d1ipvetlnhibe202nvufc1qt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,16 @@
 import 'package:book_app/Providers/book_list_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'AppConfig/app_config.dart';
+import 'Providers/auth_providers.dart';
 import 'Providers/favorite_list_provider.dart';
 import 'Routes/routers.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -16,6 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<AuthenticationProvider>(
+          create: (_) => AuthenticationProvider(FirebaseAuth.instance),
+        ),
         ChangeNotifierProvider(
             create: (BuildContext context) => BookListProvider()),
         ChangeNotifierProvider(

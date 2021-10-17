@@ -1,5 +1,5 @@
 import 'package:book_app/AppConfig/app_config.dart';
-import 'package:book_app/Factories/book_factory.dart';
+import 'package:book_app/Core/Factories/book_factory.dart';
 import 'package:book_app/Models/book_details.dart';
 import 'package:flutter/material.dart';
 

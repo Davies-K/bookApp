@@ -1,6 +1,6 @@
 import 'package:book_app/Models/book_details.dart';
 import 'package:book_app/Models/book.dart';
-import 'package:book_app/Repositories/book/book_service_repository.dart';
+import 'package:book_app/Core/Repositories/book/book_service_repository.dart';
 import 'package:book_app/Services/Book/book_service.dart';
 
 class BookFactory extends BookServiceRepository {

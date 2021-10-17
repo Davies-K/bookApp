@@ -7,3 +7,4 @@ part 'app_theme.dart';
 part 'app_sizes.dart';
 part 'app_colors.dart';
 part 'app_strings.dart';
+part 'button_styles.dart';

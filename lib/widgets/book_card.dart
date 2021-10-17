@@ -1,7 +1,6 @@
 import 'package:book_app/AppConfig/app_config.dart';
-import 'package:book_app/Helpers/navigation_helper.dart';
+import 'package:book_app/Core/Helpers/navigation_helper.dart';
 import 'package:book_app/Models/book.dart';
-import 'package:book_app/Models/book_details.dart';
 import 'package:book_app/Presentation/Screens/book_details.dart';
 import 'package:book_app/Utils/app_utils.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +17,16 @@ class BookCard extends StatelessWidget {
             context, BookDetailsScreen(bookid: book.id));
       },
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: AppSizes.SIZE_10),
+          margin: EdgeInsets.symmetric(
+              vertical: AppSizes.SIZE_10, horizontal: AppSizes.SIZE_4),
           padding: EdgeInsets.all(AppSizes.SIZE_10),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(AppSizes.SIZE_20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey[100]!,
-                spreadRadius: 5,
+                color: Colors.grey[200]!,
+                //spreadRadius: 5,
                 blurRadius: 7,
                 offset: Offset(0, 3), // changes position of shadow
               ),
