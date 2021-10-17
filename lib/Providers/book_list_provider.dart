@@ -10,7 +10,7 @@ class BookListProvider extends ChangeNotifier {
   List<Book> _tmpbooks = [];
   late Future<List<Book>> _books = _getBookList();
   LoadingState _loadingState = LoadingState.busy;
-  LoadingState get isLoadingResults => _loadingState;
+  LoadingState get loadingState => _loadingState;
   BookFactory _bookFactory = BookFactory();
   int booksCount = 0;
   Future<List<Book>> get bookList => _books;
@@ -31,6 +31,14 @@ class BookListProvider extends ChangeNotifier {
 
   void changeSearchString(String searchString) {
     _searchString = searchString;
+    notifyListeners();
+  }
+
+  _setLoading(bool state) {
+    if (state)
+      _loadingState = LoadingState.busy;
+    else
+      _loadingState = LoadingState.idle;
     notifyListeners();
   }
 }

@@ -26,10 +26,10 @@ class BookService with BaseRepository implements BookServiceRepository {
   @override
   Future<BookDetails> getBookDetails(String bookId) async {
     try {
-      late Map<String, String> book;
-      await get(url: "$booksBaseUrl/$bookId").then((value) {
+      late Map<dynamic, dynamic> book;
+      await get(url: "$detailsBaseUrl/$bookId").then((value) {
         var decodedResponse = jsonDecode(value.body);
-        book = decodedResponse["data"];
+        book = decodedResponse;
       });
       return BookDetails.fromJson(book);
     } catch (e) {

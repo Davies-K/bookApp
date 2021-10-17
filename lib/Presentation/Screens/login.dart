@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:book_app/AppConfig/app_config.dart';
+import 'package:book_app/Core/Enums/loading.dart';
 import 'package:book_app/Providers/auth_providers.dart';
 import 'package:book_app/Utils/app_utils.dart';
 import 'package:book_app/widgets/labelled_single_form.dart';
 import 'package:book_app/widgets/outlined_button.dart';
 import 'package:book_app/widgets/primary_round_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -56,26 +60,32 @@ class _LoginState extends State<Login> {
                           obscureText: obscureText,
                           label: "Your Password"),
                       SizedBox(height: AppSizes.HEIGHT_40),
-                      PrimaryRoundButton(
-                          color: Colors.blue,
-                          label: "  Continue with Email",
-                          icon: Icons.email),
-                      SizedBox(height: AppSizes.HEIGHT_14),
-                      PrimaryRoundButton(
-                          color: Colors.red,
-                          label: "  Google Sign In.",
-                          onButtonPressed: () async {
-                            provider.signInwithGoogle();
-                          },
-                          icon: Icons.alternate_email),
-                      SizedBox(height: AppSizes.HEIGHT_14),
-                      PrimaryRoundButton(
-                          color: Colors.black,
-                          label: "  Sign In Anonymously",
-                          onButtonPressed: () async {
-                            provider.signInAnonymously();
-                          },
-                          icon: FontAwesomeIcons.ghost),
+                      provider.loadingState == LoadingState.busy
+                          ? Platform.isAndroid
+                              ? Center(child: CircularProgressIndicator())
+                              : Center(child: CupertinoActivityIndicator())
+                          : Column(children: [
+                              PrimaryRoundButton(
+                                  color: Colors.blue,
+                                  label: "  Continue with Email",
+                                  icon: Icons.email),
+                              SizedBox(height: AppSizes.HEIGHT_14),
+                              PrimaryRoundButton(
+                                  color: Colors.red,
+                                  label: "  Google Sign In.",
+                                  onButtonPressed: () async {
+                                    provider.signInwithGoogle();
+                                  },
+                                  icon: Icons.alternate_email),
+                              SizedBox(height: AppSizes.HEIGHT_14),
+                              PrimaryRoundButton(
+                                  color: Colors.black,
+                                  label: "  Sign In Anonymously",
+                                  onButtonPressed: () async {
+                                    provider.signInAnonymously();
+                                  },
+                                  icon: FontAwesomeIcons.ghost),
+                            ])
                     ]);
               }),
             ))));

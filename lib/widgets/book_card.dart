@@ -13,8 +13,9 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        print(book.id);
         AppNavigationHelper.navigateToWidget(
-            context, BookDetailsScreen(bookid: book.id));
+            context, BookDetailsScreen(bookid: book.id!));
       },
       child: Container(
           margin: EdgeInsets.symmetric(

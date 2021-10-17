@@ -1,10 +1,14 @@
+import 'package:book_app/Core/Enums/loading.dart';
+import 'package:book_app/Core/Exceptions/firebase_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthenticationProvider {
+class AuthenticationProvider extends ChangeNotifier {
+  LoadingState _loadingState = LoadingState.idle;
   final FirebaseAuth firebaseAuth;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-
+  LoadingState get loadingState => _loadingState;
   AuthenticationProvider(this.firebaseAuth);
 
   Stream<User?> get authState => firebaseAuth.idTokenChanges();
@@ -14,6 +18,7 @@ class AuthenticationProvider {
   }
 
   Future<String?> signInwithGoogle() async {
+    _setLoading(true);
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
@@ -23,10 +28,13 @@ class AuthenticationProvider {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      await firebaseAuth.signInWithCredential(credential);
+      await firebaseAuth.signInWithCredential(credential).then((value) {
+        if (value == null) _setLoading(false);
+      });
     } on FirebaseAuthException catch (e) {
-      print(e.message);
-      throw e;
+      FirebaseAuthExceptions.getMessageFromErrorCode(e);
+      _setLoading(false);
+      //throw e;
     }
   }
 
@@ -56,12 +64,23 @@ class AuthenticationProvider {
   }
 
   Future signInAnonymously() async {
+    _setLoading(true);
     firebaseAuth.signInAnonymously().then((result) {
       authState;
+
+      _setLoading(false);
     });
   }
 
   Future<String?> uid() async {
     return firebaseAuth.currentUser!.uid;
+  }
+
+  _setLoading(bool state) {
+    if (state == true)
+      _loadingState = LoadingState.busy;
+    else
+      _loadingState = LoadingState.idle;
+    notifyListeners();
   }
 }

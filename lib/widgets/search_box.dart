@@ -37,7 +37,7 @@ class SearchBox extends StatelessWidget {
           onTap: () {
             controller!.text = "";
           },
-          child: Icon(FeatherIcons.stopCircle,
+          child: Icon(FeatherIcons.xCircle,
               color: AppColors.primaryText, size: 20),
         ),
         hintText: placeholder,
