@@ -22,7 +22,7 @@ class _BookListPageState extends State<BookListPage> {
     return SafeArea(
         child: Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.SIZE_20),
-      child: Consumer<BookListProvider>(builder: (context, provider, child) {
+      child: Consumer<BookListProvider>(builder: (context, provider, _) {
         print(provider.bookList);
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const SizedBox(height: AppSizes.HEIGHT_20),

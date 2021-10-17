@@ -1,13 +1,15 @@
 import 'package:book_app/AppConfig/app_config.dart';
 import 'package:book_app/Presentation/Screens/profile.dart';
 import 'package:book_app/widgets/bottom_navigation_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'book_list.dart';
 import 'favourites.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  final User firebaseUser;
+  Home({Key? key, required this.firebaseUser}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }

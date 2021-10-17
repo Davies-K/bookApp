@@ -26,7 +26,7 @@ class OutlinedButtonWithImage extends StatelessWidget {
                 height: 30,
                 child: ClipOval(
                   child: Image(
-                      fit: BoxFit.contain, image: AssetImage(this.imageUrl)),
+                      fit: BoxFit.cover, image: AssetImage(this.imageUrl)),
                 ),
               ),
             )));

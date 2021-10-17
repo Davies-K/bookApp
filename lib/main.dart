@@ -23,6 +23,10 @@ class MyApp extends StatelessWidget {
         Provider<AuthenticationProvider>(
           create: (_) => AuthenticationProvider(FirebaseAuth.instance),
         ),
+        StreamProvider(
+          create: (context) => context.read<AuthenticationProvider>().authState,
+          initialData: null,
+        ),
         ChangeNotifierProvider(
             create: (BuildContext context) => BookListProvider()),
         ChangeNotifierProvider(

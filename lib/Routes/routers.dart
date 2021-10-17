@@ -1,13 +1,15 @@
-import 'package:book_app/Presentation/Screens/home.dart';
+import 'package:book_app/Presentation/Screens/authenticate_screen.dart';
 import 'package:book_app/Presentation/Screens/login.dart';
 import 'package:book_app/Presentation/Screens/splash.dart';
 import 'package:flutter/material.dart';
 
 class Routers {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<dynamic> generateRoute(
+    RouteSettings settings,
+  ) {
     switch (settings.name) {
-      case 'home':
-        return MaterialPageRoute(builder: (_) => Home());
+      case 'authenticate':
+        return MaterialPageRoute(builder: (_) => AuthenticateScreen());
       case 'splash':
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case 'login':
