@@ -12,9 +12,11 @@ class BookService with BaseRepository implements BookServiceRepository {
     try {
       List<Book> books = [];
       await get(url: "$booksBaseUrl").then((value) {
+        print(value);
         var decodedResponse = jsonDecode(value.body);
-        for (var book in decodedResponse["data"])
+        for (var book in decodedResponse["items"]) {
           books.add(Book.fromJson(book));
+        }
       });
       return books;
     } catch (e) {

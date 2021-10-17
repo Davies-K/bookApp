@@ -34,7 +34,7 @@ mixin BaseRepository {
     debugPrint(url);
     try {
       http.Response response = await http
-          .post(Uri.parse(url), headers: headers)
+          .get(Uri.parse(url), headers: headers)
           .timeout(Duration(seconds: 60));
       return response;
     } catch (e) {

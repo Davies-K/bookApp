@@ -17,11 +17,15 @@ class Book {
   factory Book.fromJson(Map<dynamic, dynamic> json) {
     return Book(
         id: json['id'],
-        title: json['title'],
-        ratings: json['ratings'],
-        image: json['image'],
-        category: json['category'],
-        author: json['author']);
+        title: json['volumeInfo']['title'],
+        ratings: json['volumeInfo']['averageRating'] == null
+            ? "N/A"
+            : json['volumeInfo']['averageRating'].toString(),
+        image: json['volumeInfo']['imageLinks']['thumbnail'],
+        category: json['volumeInfo']['categories'] == null
+            ? "N/A"
+            : json['volumeInfo']['categories'][0],
+        author: json['volumeInfo']['authors'][0]);
   }
 
   Map<String, dynamic> toJson() {

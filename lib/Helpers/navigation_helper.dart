@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AppNavigationHelper {
-  static navigateTo(context, {required String pageName}) {
+  static navigateTo(
+    context, {
+    required String pageName,
+  }) {
     return Navigator.pushNamed(context, pageName);
+  }
+
+  static navigateToWidget(context, Widget widget) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => widget),
+    );
   }
 
   static navigateAndReplace(context, {required String pageName}) {
