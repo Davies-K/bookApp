@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
   final Book book;
-  const BookCard({Key? key, required this.book}) : super(key: key);
+  final String? pageName;
+  const BookCard({Key? key, required this.book, this.pageName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,11 @@ class BookCard extends StatelessWidget {
       onTap: () {
         print(book.id);
         AppNavigationHelper.navigateToWidget(
-            context, BookDetailsScreen(bookid: book.id!));
+            context,
+            BookDetailsScreen(
+              bookid: book.id!,
+              pageName: pageName!,
+            ));
       },
       child: Container(
           margin: EdgeInsets.symmetric(

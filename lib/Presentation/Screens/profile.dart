@@ -15,6 +15,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
+    print(firebaseUser.displayName);
     return SafeArea(
         child: Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.SIZE_32),
@@ -46,11 +47,11 @@ class ProfilePage extends StatelessWidget {
                             radius: 20,
                           ),
                     Text(
-                        firebaseUser.displayName == null
+                        firebaseUser.displayName!.isEmpty
                             ? "Anonymous"
                             : firebaseUser.displayName!,
                         style: Theme.of(context).textTheme.headline1),
-                    firebaseUser.email == null
+                    firebaseUser.email!.isEmpty
                         ? Text("N/A")
                         : Text(firebaseUser.email!),
                     SizedBox(height: AppSizes.HEIGHT_18),

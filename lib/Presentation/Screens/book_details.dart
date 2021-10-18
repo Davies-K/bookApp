@@ -1,6 +1,8 @@
 import 'dart:io';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:book_app/AppConfig/app_config.dart';
+import 'package:book_app/Core/Databases/firestore_db.dart';
 import 'package:book_app/Core/Factories/book_factory.dart';
 import 'package:book_app/Models/book_details.dart';
 import 'package:book_app/Presentation/Layout/adaptive_layout.dart';
@@ -10,7 +12,9 @@ import 'package:flutter/material.dart';
 
 class BookDetailsScreen extends StatefulWidget {
   final String bookid;
-  BookDetailsScreen({Key? key, required this.bookid}) : super(key: key);
+  final String? pageName;
+  BookDetailsScreen({Key? key, required this.bookid, this.pageName})
+      : super(key: key);
 
   @override
   _BookDetailsScreenState createState() => _BookDetailsScreenState();
@@ -18,15 +22,11 @@ class BookDetailsScreen extends StatefulWidget {
 
 class _BookDetailsScreenState extends State<BookDetailsScreen> {
   BookFactory _bookFactory = BookFactory();
-
-  @override
-  void initState() {
-    super.initState();
-    print(widget.bookid);
-  }
-
+  FireStoreDB firestoreDB = FireStoreDB();
+  bool _isProcessing = false;
   @override
   Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
     return Scaffold(
         body: FutureBuilder<BookDetails>(
       future: _bookFactory.getBookDetails(widget.bookid),
@@ -151,47 +151,80 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                                 topLeft: Radius.circular(30),
                               ),
                             ),
-                            child: Container(
-                              width: double.infinity,
-                              // width: widthOfScreen(context) / 2 - 44,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.4),
-                                    spreadRadius: 2,
-                                    blurRadius: 2,
-                                    offset: Offset(0, 0),
-                                  ),
-                                ],
-                                border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1,
-                                ),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Add to Favourites",
-                                      style: AppUtils.getTextTheme(context)
-                                          .headline6,
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _isProcessing = true;
+                                });
+                                widget.pageName == "fav"
+                                    ? firestoreDB
+                                        .deleteBook(
+                                            snapshot.data!, firebaseUser.uid)
+                                        .then((value) => Navigator.pop(context))
+                                    : firestoreDB
+                                        .postBook(
+                                            snapshot.data!, firebaseUser.uid)
+                                        .then(
+                                            (value) => Navigator.pop(context));
+                              },
+                              child: _isProcessing
+                                  ? Platform.isAndroid
+                                      ? Center(
+                                          child: CircularProgressIndicator())
+                                      : Center(
+                                          child: CupertinoActivityIndicator())
+                                  : Container(
+                                      width: double.infinity,
+                                      // width: widthOfScreen(context) / 2 - 44,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: widget.pageName == "fav"
+                                                ? Colors.red.withOpacity(0.4)
+                                                : Colors.grey.withOpacity(0.4),
+                                            spreadRadius: 2,
+                                            blurRadius: 2,
+                                            offset: Offset(0, 0),
+                                          ),
+                                        ],
+                                        border: Border.all(
+                                          color: widget.pageName == "fav"
+                                              ? Colors.red
+                                              : Colors.grey,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              widget.pageName == "fav"
+                                                  ? "Remove"
+                                                  : "Add to Favourites",
+                                              style:
+                                                  AppUtils.getTextTheme(context)
+                                                      .headline6,
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Icon(
+                                              widget.pageName == "fav"
+                                                  ? Icons.delete
+                                                  : Icons.content_copy,
+                                              color: AppColors.primaryColor,
+                                              size: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Icon(
-                                      Icons.content_copy,
-                                      color: AppColors.primaryColor,
-                                      size: 20,
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ),
                         ],

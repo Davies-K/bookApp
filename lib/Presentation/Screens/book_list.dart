@@ -54,7 +54,10 @@ class _BookListPageState extends State<BookListPage> {
                         child: ListView.builder(
                         itemCount: provider.tmpList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return BookCard(book: provider.tmpList[index]);
+                          return BookCard(
+                            book: provider.tmpList[index],
+                            pageName: "bookList",
+                          );
                         },
                       ))
               ]);
