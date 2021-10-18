@@ -30,13 +30,15 @@ class AuthenticationProvider extends ChangeNotifier {
         idToken: googleSignInAuthentication.idToken,
       );
       await firebaseAuth.signInWithCredential(credential).then((value) {
-        if (value == null) _setLoading(false);
+        _setLoading(false);
       });
     } on FirebaseAuthException catch (e) {
-      FirebaseAuthExceptions.getMessageFromErrorCode(e);
+      AppUtils.showToast(
+          message: FirebaseAuthExceptions.getMessageFromErrorCode(e));
       _setLoading(false);
       //throw e;
     }
+    _setLoading(false);
   }
 
   Future<void> signOutFromGoogle() async {

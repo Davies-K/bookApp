@@ -15,7 +15,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-    print(firebaseUser.displayName);
     return SafeArea(
         child: Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.SIZE_32),
@@ -44,7 +43,7 @@ class ProfilePage extends StatelessWidget {
                         : CircleAvatar(
                             backgroundImage:
                                 NetworkImage(firebaseUser.photoURL!),
-                            radius: 20,
+                            radius: AppSizes.SIZE_40,
                           ),
                     Text(
                         firebaseUser.displayName == null
