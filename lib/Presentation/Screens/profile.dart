@@ -47,11 +47,11 @@ class ProfilePage extends StatelessWidget {
                             radius: 20,
                           ),
                     Text(
-                        firebaseUser.displayName!.isEmpty
+                        firebaseUser.displayName == null
                             ? "Anonymous"
                             : firebaseUser.displayName!,
                         style: Theme.of(context).textTheme.headline1),
-                    firebaseUser.email!.isEmpty
+                    firebaseUser.email == null
                         ? Text("N/A")
                         : Text(firebaseUser.email!),
                     SizedBox(height: AppSizes.HEIGHT_18),

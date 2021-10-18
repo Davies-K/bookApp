@@ -9,6 +9,7 @@ import 'package:book_app/widgets/outlined_button.dart';
 import 'package:book_app/widgets/primary_round_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -47,11 +48,11 @@ class _LoginState extends State<Login> {
                       ),
                       SizedBox(height: 30),
                       LabelledSingleInput(
-                          placeholder: "Name",
+                          placeholder: "Email",
                           keyboardType: "text",
                           controller: _nameController,
                           obscureText: obscureText,
-                          label: "Your Name"),
+                          label: "Your Email"),
                       SizedBox(height: 15),
                       LabelledSingleInput(
                           placeholder: "Password",
@@ -68,6 +69,17 @@ class _LoginState extends State<Login> {
                               PrimaryRoundButton(
                                   color: Colors.blue,
                                   label: "  Continue with Email",
+                                  onButtonPressed: () {
+                                    if (_nameController.text.isEmpty ||
+                                        _passController.text.isEmpty)
+                                      return AppUtils.showToast(
+                                          message:
+                                              "Email and Password required to Continue");
+                                    else
+                                      provider.signIn(
+                                          email: _nameController.text,
+                                          password: _passController.text);
+                                  },
                                   icon: Icons.email),
                               SizedBox(height: AppSizes.HEIGHT_14),
                               PrimaryRoundButton(
@@ -85,6 +97,33 @@ class _LoginState extends State<Login> {
                                     provider.signInAnonymously();
                                   },
                                   icon: FontAwesomeIcons.ghost),
+                              SizedBox(height: AppSizes.HEIGHT_14),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Divider(),
+                                    Text("OR",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline1),
+                                    Divider()
+                                  ]),
+                              SizedBox(height: AppSizes.HEIGHT_14),
+                              PrimaryRoundButton(
+                                  color: Colors.green,
+                                  label: "  Signup with Email",
+                                  onButtonPressed: () {
+                                    if (_nameController.text.isEmpty ||
+                                        _passController.text.isEmpty)
+                                      return AppUtils.showToast(
+                                          message:
+                                              "Email and Password required to Continue");
+                                    else
+                                      provider.signUp(
+                                          email: _nameController.text,
+                                          password: _passController.text);
+                                  },
+                                  icon: FeatherIcons.plusCircle),
                             ])
                     ]);
               }),

@@ -47,10 +47,12 @@ class BookCard extends StatelessWidget {
                   height: AppSizes.HEIGHT_150,
                   width: AppSizes.WIDTH_100,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppSizes.SIZE_10),
-                    child: Image(
-                        fit: BoxFit.cover, image: NetworkImage(book.image!)),
-                  ),
+                      borderRadius: BorderRadius.circular(AppSizes.SIZE_10),
+                      child: FadeInImage.assetNetwork(
+                        fit: BoxFit.cover,
+                        image: book.image!,
+                        placeholder: 'assets/images/placeholder-image.png',
+                      )),
                 ),
                 SizedBox(width: AppSizes.WIDTH_12),
                 Expanded(
